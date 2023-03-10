@@ -1,4 +1,4 @@
-myobj = [
+body = [
     {
         "VAR2": "M",
         "IDADE": 43.893,
