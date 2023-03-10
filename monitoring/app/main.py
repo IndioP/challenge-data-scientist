@@ -4,16 +4,18 @@ from fastapi import FastAPI
 from api.routers import router
 from typing import List
 
-import numpy as np
+import logging
 
 from scipy.stats import kstest, mannwhitneyu
 
 from Registro import Registro
 
 
-from utils import calculate_volumetry, calculate_ROC, load_model, load_dataset, load_compressed_dataset, predict_twin_datasets
+from utils import calculate_volumetry, calculate_ROC, load_model, load_compressed_dataset, predict_twin_datasets
 
 app = FastAPI(title='Monitoramento de modelos', version="1.0.0")
+logging.basicConfig(level=logging.INFO, filename="API.log",format='%(asctime)s - %(message)s')
+logger = logging.getLogger()
 
 @app.get("/")
 def read_root():
@@ -22,12 +24,15 @@ def read_root():
 
 @app.post("/v1/")
 def post_data(registros: List[Registro]):
+    logger.info("API POST to first endpoint")
     volumetria = calculate_volumetry(registros)
     ROC_AUC = calculate_ROC()
     return {"volumetria":volumetria,"ROC-AUC":ROC_AUC}
     
 @app.post("/v2/")
 def post_data(file_path: str, test:str = 'KS'):
+    logger.info(f"API POST to second endpoint with params: {file_path}, {test}")
+
     #load the model
     model = load_model()
 
