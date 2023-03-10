@@ -9,6 +9,8 @@ import pandas as pd
 import pickle
 import numpy as np
 
+from scipy.stats import kstest
+
 from Registro import Registro
 from sklearn.metrics import roc_auc_score
 
@@ -32,15 +34,19 @@ def calculate_ROC():
     df = df.fillna(value=np.nan)
     y_true = df["TARGET"]
     #predict labels using the model
-    pred = model.predict(df.drop(["REF_DATE","TARGET"],axis=1))
+    pred = model.predict_proba(df.drop(["REF_DATE","TARGET"],axis=1))[:,1]
     #Calculate the area under ROC curve
     return roc_auc_score(y_true,pred)
 
 def load_model():
     with open("../model.pkl","rb") as f:
         return pickle.load(f)
-def load_dataset():
-    return pd.read_json('../batch_records.json')
+    
+def load_dataset(file_path = '../batch_records.json'):
+    return pd.read_json(file_path)
+
+def load_compressed_dataset(file_path):
+    return pd.read_csv(file_path,compression='gzip')
 
 @app.get("/")
 def read_root():
@@ -52,6 +58,31 @@ def post_data(registros: List[Registro]):
     volumetria = calculate_volumetry(registros)
     ROC_AUC = calculate_ROC()
     return {"volumetria":volumetria,"ROC-AUC":ROC_AUC}
+    
+@app.post("/v2/")
+def post_data(file_path: str):
+    #load the model
+    model = load_model()
+
+    #load the datasets
+    df_test = load_compressed_dataset("../../datasets/credit_01/test.gz")
+    df_input = load_compressed_dataset(file_path)
+    
+    #filter Null values
+    df_test.fillna(value=np.nan,inplace=True)
+    df_input.fillna(value=np.nan,inplace=True)
+    
+    #predict both datasets
+    pred_test = model.predict_proba(df_test.drop(["REF_DATE","TARGET"],axis=1))[:,1]
+    #oot doesn't have the target column
+    try:
+        df_input = df_input.drop(["REF_DATE","TARGET"],axis=1)
+    except:
+        df_input = df_input.drop(["REF_DATE"],axis=1)
+        df_input = df_input.replace('MUITO PROXIMO',np.NAN)  #cleaning the unexpected value
+    pred_input = model.predict_proba(df_input)[:,1]
+    
+    return kstest(pred_test, pred_input)
     
 
 app.include_router(router, prefix="/v1")
