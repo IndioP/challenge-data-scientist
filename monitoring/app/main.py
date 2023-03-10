@@ -6,7 +6,11 @@ from typing import List
 
 import pandas as pd
 
+import pickle
+import numpy as np
+
 from Registro import Registro
+from sklearn.metrics import roc_auc_score
 
 app = FastAPI(title='Monitoramento de modelos', version="1.0.0")
 
@@ -20,15 +24,34 @@ def calculate_volumetry(registros):
     #retornando um dicionario com a frequencia para cada mes
     return volumetria.to_dict()
 
+def calculate_ROC():
+    #load model and dataset
+    model = load_model()
+    df = load_dataset()
+    #replace null values
+    df = df.fillna(value=np.nan)
+    y_true = df["TARGET"]
+    #predict labels using the model
+    pred = model.predict(df.drop(["REF_DATE","TARGET"],axis=1))
+    #Calculate the area under ROC curve
+    return roc_auc_score(y_true,pred)
+
+def load_model():
+    with open("../model.pkl","rb") as f:
+        return pickle.load(f)
+def load_dataset():
+    return pd.read_json('../batch_records.json')
+
 @app.get("/")
 def read_root():
     """Hello World message."""
     return {"Hello World": "from FastAPI"}
 
-@app.post("/")
+@app.post("/v1/")
 def post_data(registros: List[Registro]):
     volumetria = calculate_volumetry(registros)
-    return {"volumetria":volumetria}
+    ROC_AUC = calculate_ROC()
+    return {"volumetria":volumetria,"ROC-AUC":ROC_AUC}
     
 
 app.include_router(router, prefix="/v1")
