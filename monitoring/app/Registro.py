@@ -1,123 +1,123 @@
 from pydantic import BaseModel
 
 class Registro(BaseModel):
-    VAR2: str
-    IDADE: float
-    VAR5: str
-    VAR6: float
-    VAR7: float
-    VAR8: str
-    VAR9: str
-    VAR10: str
-    VAR11: float
-    VAR12: float
-    VAR14: float
-    VAR15: float
-    VAR16: float
-    VAR18: float
-    VAR19: float
-    VAR22: float
-    VAR24: float
-    VAR25: float
-    VAR32: str
-    VAR39: float
-    VAR40: float
-    VAR41: float
-    VAR42: float
-    VAR47: float
-    VAR49: str
-    VAR50: str
-    VAR51: str
-    VAR52: str
-    VAR53: str
-    VAR54: str
-    VAR55: str
-    VAR56: str
-    VAR57: str
-    VAR58: str
-    VAR59: str
-    VAR60: str
-    VAR61: str
-    VAR62: str
-    VAR63: str
-    VAR64: str
-    VAR65: str
-    VAR66: str
-    VAR67: str
-    VAR68: str
-    VAR69: str
-    VAR70: str
-    VAR71: str
-    VAR72: str
-    VAR73: str
-    VAR74: str
-    VAR75: str
-    VAR76: str
-    VAR77: str
-    VAR78: str
-    VAR79: str
-    VAR80: str
-    VAR81: str
-    VAR82: str
-    VAR83: str
-    VAR84: str
-    VAR85: str
-    VAR86: str
-    VAR87: str
-    VAR88: str
-    VAR89: str
-    VAR90: str
-    VAR91: str
-    VAR92: str
-    VAR93: str
-    VAR94: str
-    VAR95: str
-    VAR96: str
-    VAR97: str
-    VAR98: str
-    VAR99: str
-    VAR100: str
-    VAR101: str
-    VAR102: str
-    VAR103: str
-    VAR104: str
-    VAR105: str
-    VAR106: str
-    VAR107: str
-    VAR108: str
-    VAR109: str
-    VAR110: str
-    VAR111: str
-    VAR112: str
-    VAR113: str
-    VAR114: str
-    VAR115: str
-    VAR116: str
-    VAR117: str
-    VAR118: str
-    VAR119: str
-    VAR120: str
-    VAR121: str
-    VAR122: str
-    VAR123: str
-    VAR124: str
-    VAR125: str
-    VAR126: str
-    VAR127: str
-    VAR128: str
-    VAR129: str
-    VAR130: str
-    VAR131: str
-    VAR132: str
-    VAR133: str
-    VAR134: str
-    VAR135: str
-    VAR136: str
-    VAR137: str
-    VAR138: str
-    VAR139: str
-    VAR140: str
-    VAR141: float
-    VAR142: str
-    REF_DATE: str
-    TARGET: int
+    VAR2: str = None
+    IDADE: float = None
+    VAR5: str = None
+    VAR6: float = None
+    VAR7: float = None
+    VAR8: str = None
+    VAR9: str = None
+    VAR10: str = None
+    VAR11: float = None
+    VAR12: float = None
+    VAR14: float = None
+    VAR15: float = None
+    VAR16: float = None
+    VAR18: float = None
+    VAR19: float = None
+    VAR22: float = None
+    VAR24: float = None
+    VAR25: float = None
+    VAR32: str = None
+    VAR39: float = None
+    VAR40: float = None
+    VAR41: float = None
+    VAR42: float = None
+    VAR47: float = None
+    VAR49: str = None
+    VAR50: str = None
+    VAR51: str = None
+    VAR52: str = None
+    VAR53: str = None
+    VAR54: str = None
+    VAR55: str = None
+    VAR56: str = None
+    VAR57: str = None
+    VAR58: str = None
+    VAR59: str = None
+    VAR60: str = None
+    VAR61: str = None
+    VAR62: str = None
+    VAR63: str = None
+    VAR64: str = None
+    VAR65: str = None
+    VAR66: str = None
+    VAR67: str = None
+    VAR68: str = None
+    VAR69: str = None
+    VAR70: str = None
+    VAR71: str = None
+    VAR72: str = None
+    VAR73: str = None
+    VAR74: str = None
+    VAR75: str = None
+    VAR76: str = None
+    VAR77: str = None
+    VAR78: str = None
+    VAR79: str = None
+    VAR80: str = None
+    VAR81: str = None
+    VAR82: str = None
+    VAR83: str = None
+    VAR84: str = None
+    VAR85: str = None
+    VAR86: str = None
+    VAR87: str = None
+    VAR88: str = None
+    VAR89: str = None
+    VAR90: str = None
+    VAR91: str = None
+    VAR92: str = None
+    VAR93: str = None
+    VAR94: str = None
+    VAR95: str = None
+    VAR96: str = None
+    VAR97: str = None
+    VAR98: str = None
+    VAR99: str = None
+    VAR100: str = None
+    VAR101: str = None
+    VAR102: str = None
+    VAR103: str = None
+    VAR104: str = None
+    VAR105: str = None
+    VAR106: str = None
+    VAR107: str = None
+    VAR108: str = None
+    VAR109: str = None
+    VAR110: str = None
+    VAR111: str = None
+    VAR112: str = None
+    VAR113: str = None
+    VAR114: str = None
+    VAR115: str = None
+    VAR116: str = None
+    VAR117: str = None
+    VAR118: str = None
+    VAR119: str = None
+    VAR120: str = None
+    VAR121: str = None
+    VAR122: str = None
+    VAR123: str = None
+    VAR124: str = None
+    VAR125: str = None
+    VAR126: str = None
+    VAR127: str = None
+    VAR128: str = None
+    VAR129: str = None
+    VAR130: str = None
+    VAR131: str = None
+    VAR132: str = None
+    VAR133: str = None
+    VAR134: str = None
+    VAR135: str = None
+    VAR136: str = None
+    VAR137: str = None
+    VAR138: str = None
+    VAR139: str = None
+    VAR140: str = None
+    VAR141: float = None
+    VAR142: str = None
+    REF_DATE: str = None
+    TARGET: int = None
