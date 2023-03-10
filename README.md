@@ -9,3 +9,11 @@ Navegue para seu desafio de interesse, baseado no problema de negócio envolvido
 _Disclaimer:_ as bases de dados e instruções podem mudar entre um processo seletivo e outro.
 
 Boa sorte e bom trabalho!
+
+
+# NOTAS DE DOUGLAS
+
+entrar na venv criada para o projeto (neurotech)
+
+PARA RODAR O APP, ENTRAR NA PASTA monitoring/app e rodar o seguinte comando:
+- uvicorn main:app --reload
