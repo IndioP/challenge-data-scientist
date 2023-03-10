@@ -34,6 +34,7 @@ def post_data(file_path: str, test:str = 'KS'):
     #load the datasets
     df_test = load_compressed_dataset("../../datasets/credit_01/test.gz")
     df_input = load_compressed_dataset(file_path)
+
     pred_test, pred_input = predict_twin_datasets(model,df_test,df_input)
     
     if test == 'MAN':

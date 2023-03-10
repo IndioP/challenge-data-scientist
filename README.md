@@ -17,3 +17,6 @@ entrar na venv criada para o projeto (neurotech)
 
 PARA RODAR O APP, ENTRAR NA PASTA monitoring/app e rodar o seguinte comando:
 - uvicorn main:app --reload
+
+o notebook rodando os 2 endpoints com algumas opções de parametros se encontra em test_v2.ipynb
+aux.ipynb(foi um notebook que eu usei para testar alguns insights que tive durante o projeto, talvez seja interessante)
