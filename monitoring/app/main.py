@@ -9,7 +9,7 @@ import pandas as pd
 import pickle
 import numpy as np
 
-from scipy.stats import kstest
+from scipy.stats import kstest, mannwhitneyu
 
 from Registro import Registro
 from sklearn.metrics import roc_auc_score
@@ -60,7 +60,7 @@ def post_data(registros: List[Registro]):
     return {"volumetria":volumetria,"ROC-AUC":ROC_AUC}
     
 @app.post("/v2/")
-def post_data(file_path: str):
+def post_data(file_path: str, test:str = 'KS'):
     #load the model
     model = load_model()
 
@@ -81,8 +81,14 @@ def post_data(file_path: str):
         df_input = df_input.drop(["REF_DATE"],axis=1)
         df_input = df_input.replace('MUITO PROXIMO',np.NAN)  #cleaning the unexpected value
     pred_input = model.predict_proba(df_input)[:,1]
-    
-    return kstest(pred_test, pred_input)
+    if test == 'MAN':
+        # é um teste estatistico mais conhecido e equivalente ao KS
+        #ambos são nonparametrics e podem ser usados para comparar grupos não pareados
+        s,p = mannwhitneyu(pred_test, pred_input)
+        return {"estatistica de mannwithneyu":s,"p":p}
+    else:
+        s,p = kstest(pred_test, pred_input)
+        return {"estatistica de Kolmogorov-Smirnov":s,"p":p}
     
 
 app.include_router(router, prefix="/v1")
